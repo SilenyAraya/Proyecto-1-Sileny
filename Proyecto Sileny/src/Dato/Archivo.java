@@ -3,6 +3,7 @@ package Dato;
 
 import java.io.File;
 import java.io.IOException;
+//import Presentacion.Login;
 
 public class Archivo {
 
@@ -23,6 +24,10 @@ public class Archivo {
     }
     public static void main(String[] args) {
         crearArchivo();
+        //Login f = new Login();
+        //f.setVisible(true);
+        
+
         
     }
 }

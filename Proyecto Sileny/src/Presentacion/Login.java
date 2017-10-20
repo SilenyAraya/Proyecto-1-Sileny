@@ -1,15 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Presentacion;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javafx.scene.control.CheckBox;
 import javax.swing.JOptionPane;
+import Dato.Archivo;
+import Negocio.RegistrarUsuario;
+import Negocio.AdmModificador;
 
 /**
  *
@@ -23,10 +22,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
-        jlabelUsuario.setFont(new java.awt.Font("Tahoma", 1, 14));
-        jlabelUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelContraseña.setFont(new java.awt.Font("Tahoma", 1, 14));
-        jLabelContraseña.setForeground(new java.awt.Color(255, 255, 255));
     }
 
     /**
@@ -38,76 +33,96 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlabelUsuario = new javax.swing.JLabel();
-        jLabelContraseña = new javax.swing.JLabel();
-        passwordUsu = new javax.swing.JPasswordField();
-        txtNomUsuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblUsuario = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        btnRegistrarse = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jlabelUsuario.setText(" Usuario:");
-        getContentPane().add(jlabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 20));
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsuario.setText("Usuario:");
+        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 70, 20));
 
-        jLabelContraseña.setText(" Contraseña:");
-        getContentPane().add(jLabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, 20));
-        getContentPane().add(passwordUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 220, 30));
+        lblContraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblContraseña.setForeground(new java.awt.Color(255, 255, 255));
+        lblContraseña.setText("Contraseña:");
+        getContentPane().add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, 30));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 170, 30));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 180, 30));
 
-        txtNomUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomUsuarioActionPerformed(evt);
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrarseMouseClicked(evt);
             }
         });
-        getContentPane().add(txtNomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 220, 30));
+        getContentPane().add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
-        jButton1.setText("Registrase");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
-
-        jButton2.setText("Iniciar Sección");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        btnEntrar.setText("Entrar");
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEntrarMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, -1));
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 90, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/discos.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNomUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomUsuarioActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            String temp;
+    public boolean verify(String user, String pass)
+    {
+         try {
+            
             try (BufferedReader bf = new BufferedReader(new FileReader("Login.txt"))) {
                 String bfRead;
                 while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(",");
-                    if (lista1[0].equals(jlabelUsuario)){
-                        //Verify that the username and password are correct.
-                        elif ( (lista1[1].equals(jLabelContraseña))) )
-                        JOptionPane.showMessageDialog(null, "Bienvenido");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Datos son incorrectos, intentelo de nuevo");
+                    String[] datos = bfRead.split(",");
+                    if(datos[0].equals(user) && datos[1].equals(pass)){
+                        return true;
                     }
-                    //In case the file is not found, the user is informed
+                   
                 }
             }
         } catch (IOException e) {
             System.out.println("No se encontro el archivo" + e);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        return false;
+    }       
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+        /*Archivo identificador = new Archivo(); 
+        String pass = new String(password.getPassword());*/
+        
+    }//GEN-LAST:event_btnEntrarMouseClicked
+
+    private void btnRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseClicked
+        RegistrarUsuario ventanaRegistro = new RegistrarUsuario();
+        ventanaRegistro.pack();
+        ventanaRegistro.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarseMouseClicked
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        if (verify(txtUsuario.getText(), password.getText())) {
+            AdmModificador ventanaModificador = new AdmModificador();
+            ventanaModificador.pack();
+            ventanaModificador.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuario incorrecto, intente de nuevo");
+        }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,12 +160,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelContraseña;
-    private javax.swing.JLabel jlabelUsuario;
-    private javax.swing.JPasswordField passwordUsu;
-    private javax.swing.JTextField txtNomUsuario;
+    private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
