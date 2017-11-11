@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Negocio;
 
+package Negocio;
+import Dato.persona;
 import javax.swing.JOptionPane;
 import Dato.Archivo;
 import java.awt.Color;
 
-/**
- *
- * @author Sileny Araya
- */
+
 public class RegistrarUsuario extends javax.swing.JFrame {
 
     /**
@@ -21,7 +14,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     public RegistrarUsuario() {
         initComponents();
         setLocationRelativeTo(null);
-        //JOptionPane.showMessageDialog(null, "Complete todos los espacios para poder registrase");
+        
     }
 
     /**
@@ -34,46 +27,61 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsuarioN = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        passUsuarioN = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        btnAtras = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, 30));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 80, 30));
+
+        txtUsuarioN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioNActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtUsuarioN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 90, 30));
-        getContentPane().add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 30));
+        getContentPane().add(passUsuarioN, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 190, 30));
 
         jButton1.setText("Registrarse");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 120, 30));
-
-        btnAtras.setText("Atras");
-        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAtrasMouseClicked(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 120, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registro.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        RegistrarUsuario ventanaPrincipal = new RegistrarUsuario();
-        ventanaPrincipal.pack();
-        ventanaPrincipal.setVisible(true);
-    }//GEN-LAST:event_btnAtrasMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String name = txtUsuarioN.getText();
+        String id = passUsuarioN.getText();
+
+        persona nuevoUsuario = new persona(name, Integer.parseInt(id));
+        nuevoUsuario.agregar();
+        
+        
+        JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtUsuarioNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,11 +119,11 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtras;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField passUsuarioN;
+    private javax.swing.JTextField txtUsuarioN;
     // End of variables declaration//GEN-END:variables
 }

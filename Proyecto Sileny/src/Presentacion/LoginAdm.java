@@ -8,18 +8,17 @@ import javafx.scene.control.CheckBox;
 import javax.swing.JOptionPane;
 import Dato.Archivo;
 import Negocio.RegistrarUsuario;
-import Negocio.AdmModificador;
 
 /**
  *
  * @author Sileny Araya
  */
-public class Login extends javax.swing.JFrame {
+public class LoginAdm extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public LoginAdm() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -37,7 +36,6 @@ public class Login extends javax.swing.JFrame {
         lblContraseña = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
         txtUsuario = new javax.swing.JTextField();
-        btnRegistrarse = new javax.swing.JButton();
         btnEntrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -55,14 +53,6 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, 30));
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 170, 30));
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 180, 30));
-
-        btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrarseMouseClicked(evt);
-            }
-        });
-        getContentPane().add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         btnEntrar.setText("Entrar");
         btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,18 +97,13 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEntrarMouseClicked
 
-    private void btnRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseClicked
-        RegistrarUsuario ventanaRegistro = new RegistrarUsuario();
-        ventanaRegistro.pack();
-        ventanaRegistro.setVisible(true);
-    }//GEN-LAST:event_btnRegistrarseMouseClicked
-
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
         if (verify(txtUsuario.getText(), password.getText())) {
-            AdmModificador ventanaModificador = new AdmModificador();
-            ventanaModificador.pack();
-            ventanaModificador.setVisible(true);
+            System.out.println("Bienvenido");
+            AdmModificador ventanaSecundaria = new AdmModificador();
+            ventanaSecundaria.pack();
+            ventanaSecundaria.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Usuario incorrecto, intente de nuevo");
         }
@@ -141,27 +126,26 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginAdm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblUsuario;

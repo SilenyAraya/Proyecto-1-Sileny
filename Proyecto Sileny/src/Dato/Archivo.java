@@ -3,7 +3,6 @@ package Dato;
 
 import java.io.File;
 import java.io.IOException;
-//import Presentacion.Login;
 
 public class Archivo {
 
@@ -12,6 +11,7 @@ public class Archivo {
     }
 
     public static void crearArchivo() {
+        //Files are created if they do not exist
         try {
             File archivo;
             archivo = new File("Login.txt");
@@ -21,13 +21,38 @@ public class Archivo {
         } catch (IOException e) {
             System.out.println("No se creo el archivo" + e);
         }
+        try {
+            File archivo;
+            archivo = new File("Usuarios.txt");
+            if (archivo.createNewFile()) {
+                System.out.println("Se ha creado el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("No se creo el archivo" + e);
+        }
+        try {
+            File archivo;
+            archivo = new File("Musica.txt");
+            if (archivo.createNewFile()) {
+                System.out.println("Se ha creado el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("No se creo el archivo" + e);
+        }
+        try {
+            File archivo;
+            archivo = new File("Peliculas.txt");
+            if (archivo.createNewFile()) {
+                System.out.println("Se ha creado el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("No se creo el archivo" + e);
+        }
+        
     }
+    
     public static void main(String[] args) {
         crearArchivo();
-        //Login f = new Login();
-        //f.setVisible(true);
-        
-
         
     }
 }
